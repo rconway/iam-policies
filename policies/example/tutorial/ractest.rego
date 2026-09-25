@@ -19,8 +19,6 @@ default allow = true
 
 allow = true
 
-print("[zzz] input request: ", input.request)
-
 debug := "hello"
 
 # 
