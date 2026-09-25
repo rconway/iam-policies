@@ -19,17 +19,27 @@ default allow = true
 
 allow = true
 
-print("[zzz] input request: ", input.request)
-
-cert_response = http.send({
-    "url": "http://iam-keycloak-operator-service:8080/realms/eoepca/protocol/openid-connect/certs",
-    "method": "GET",
-    "force_cache": true,
-    "force_cache_duration_seconds": 3600 # Cache response for an hour
-})
-
-print("[zzz] cert_response: ", cert_response)
-
-cert_response_code = cert_response.status_code
-
-print("[zzz] cert_response_code: ", cert_response_code)
+# print("[zzz] input request: ", input.request)
+# 
+# cert_response = http.send({
+#     "url": "http://iam-keycloak-operator-service:8080/realms/eoepca/protocol/openid-connect/certs",
+#     "method": "GET",
+#     "force_cache": true,
+#     "force_cache_duration_seconds": 3600 # Cache response for an hour
+# })
+# 
+# print("[zzz] cert_response: ", cert_response)
+# 
+# cert_response_code = cert_response.status_code
+# 
+# print("[zzz] cert_response_code: ", cert_response_code)
+# 
+# default verified_claims = null
+# verified_claims := claims if {
+#     print("[verified_claims] request: ", input.request)
+#     some authKey in ["Authorization", "authorization"]
+#     [type, token] := split(input.request.headers[authKey], " ")
+#     type in ["Bearer", "bearer"]
+#     io.jwt.verify_rs256(token, jwks) == true
+#     claims := io.jwt.decode(token)[1]
+# }
