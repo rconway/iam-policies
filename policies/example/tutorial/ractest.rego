@@ -26,7 +26,7 @@ certs := http.send({
 })
 
 debug := {
-    "input_request": input.request
+    "input_request": input.request,
     "certs_code": certs.status_code
 }
 
