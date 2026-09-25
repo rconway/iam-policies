@@ -18,3 +18,6 @@ import rego.v1
 default allow = true
 
 allow = true
+
+default fred = "bob"
+bob = "barry"
