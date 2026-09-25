@@ -15,15 +15,21 @@ package example.tutorial.ractest
 
 import rego.v1
 
-default allow = true
+default allow = false
 
-allow = true
+allow if verified
 
 certs := http.send({
     "url": "http://iam-keycloak-operator-service:8080/realms/eoepca/protocol/openid-connect/certs",
     "method": "GET",
-    "raise_error": true
+    "raise_error": false
 })
+
+jwks := certs.raw_body if {
+    certs.status_code == 200
+}
+
+jwks_code := certs.status_code
 
 bearer_token := token if {
     some authKey in ["Authorization", "authorization"]
@@ -31,9 +37,19 @@ bearer_token := token if {
     lower(scheme) == "bearer"
 }
 
+verified := io.jwt.verify_rs256(bearer_token, jwks) if {
+    jwks_code == 200
+}
+
+claims := io.jwt.decode(bearer_token)[1] if {
+    verified == true
+}
+
 debug := {
-    "certs_code": certs.status_code,
-    "token": bearer_token
+    "jwks_code": jwks_code,
+    "token": bearer_token,
+    "verified": verified,
+    "error": certs.error
 }
 
 # 
