@@ -25,14 +25,15 @@ certs := http.send({
     "raise_error": true
 })
 
-some authKey in ["Authorization", "authorization"]
-[type, token] := split(input.request.headers[authKey], " ")
-type in ["Bearer", "bearer"]
+bearer_token := token if {
+    some authKey in ["Authorization", "authorization"]
+    [scheme, token] := split(input.request.headers[authKey], " ")
+    lower(scheme) == "bearer"
+}
 
 debug := {
     "certs_code": certs.status_code,
-    "type": type,
-    "token": token
+    "token": bearer_token
 }
 
 # 
