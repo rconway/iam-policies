@@ -19,13 +19,13 @@ default allow = true
 
 allow = true
 
-hello := "hello"
-
-debug := http.send({
+certs := http.send({
     "url": "http://iam-keycloak-operator-service:8080/realms/eoepca/protocol/openid-connect/certs",
     "method": "GET",
     "raise_error": true
 })
+
+certs_code := certs.status_code
 
 # 
 # print("[zzz] cert_response: ", cert_response)
