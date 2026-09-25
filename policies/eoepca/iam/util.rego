@@ -22,6 +22,8 @@ import rego.v1
 # NOTE: Once the RKE1 cluster is deprecated, this will be removed.
 
 keycloak_jwks_urls := [
+    "http://iam-keycloak/realms/eoepca/protocol/openid-connect/certs",
+    "http://iam-core-keycloak-operator-service:8080/realms/eoepca/protocol/openid-connect/certs",
     "http://iam-keycloak-operator-service:8080/realms/eoepca/protocol/openid-connect/certs"
 ]
 
@@ -32,6 +34,7 @@ keycloak_jwks_urls := [
 jwks_request(url) := http.send({
     "url": url,
     "method": "GET",
+    "timeout": "500ms",
     "force_cache": true,
     "force_cache_duration_seconds": 3600, # Cache response for an hour
     "raise_error": false # try the next candidate instead of aborting evaluation
