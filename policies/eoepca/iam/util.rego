@@ -22,9 +22,9 @@ import rego.v1
 # NOTE: Once the RKE1 cluster is deprecated, this will be removed.
 
 keycloak_jwks_urls := [
-    "http://iam-keycloak-operator-service:8080/realms/eoepca/protocol/openid-connect/certs",
+    "http://iam-keycloak/realms/eoepca/protocol/openid-connect/certs",
     "http://iam-core-keycloak-operator-service:8080/realms/eoepca/protocol/openid-connect/certs",
-    "http://iam-keycloak/realms/eoepca/protocol/openid-connect/certs"
+    "http://iam-keycloak-operator-service:8080/realms/eoepca/protocol/openid-connect/certs"
 ]
 
 # keycloak_jwks_urls := [
