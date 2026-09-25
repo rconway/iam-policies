@@ -19,14 +19,15 @@ default allow = true
 
 allow = true
 
-# print("[zzz] input request: ", input.request)
-# 
-# cert_response = http.send({
-#     "url": "http://iam-keycloak-operator-service:8080/realms/eoepca/protocol/openid-connect/certs",
-#     "method": "GET",
-#     "force_cache": true,
-#     "force_cache_duration_seconds": 3600 # Cache response for an hour
-# })
+print("[zzz] input request: ", input.request)
+
+cert_response := http.send({
+    "url": "http://iam-keycloak-operator-service:8080/realms/eoepca/protocol/openid-connect/certs",
+    "method": "GET",
+    "force_cache": true,
+    "force_cache_duration_seconds": 3600 # Cache response for an hour
+})
+
 # 
 # print("[zzz] cert_response: ", cert_response)
 # 
