@@ -25,6 +25,11 @@ certs := http.send({
     "raise_error": false
 })
 
+default certs_error := null
+certs_error := certs.error if {
+    certs.error
+}
+
 jwks := certs.raw_body if {
     certs.status_code == 200
 }
@@ -37,19 +42,20 @@ bearer_token := token if {
     lower(scheme) == "bearer"
 }
 
+default verified = false
 verified := io.jwt.verify_rs256(bearer_token, jwks) if {
     jwks_code == 200
 }
 
 claims := io.jwt.decode(bearer_token)[1] if {
-    verified == true
+    verified
 }
 
 debug := {
     "jwks_code": jwks_code,
     "token": bearer_token,
     "verified": verified,
-    "error": certs.error
+    "error": certs_error
 }
 
 # 
