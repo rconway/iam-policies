@@ -24,8 +24,7 @@ import rego.v1
 keycloak_jwks_urls := [
     "http://iam-keycloak/realms/eoepca/protocol/openid-connect/certs",
     "http://iam-core-keycloak-operator-service:8080/realms/eoepca/protocol/openid-connect/certs",
-    "http://iam-keycloak-operator-service:8080/realms/eoepca/protocol/openid-connect/certs",
-
+    "http://iam-keycloak-operator-service:8080/realms/eoepca/protocol/openid-connect/certs"
 ]
 
 jwks_request(url) := http.send({
