@@ -52,10 +52,11 @@ claims := io.jwt.decode(bearer_token)[1] if {
 }
 
 debug := {
+    "error": certs_error,
     "jwks_code": jwks_code,
     "token": bearer_token,
     "verified": verified,
-    "error": certs_error
+    "claims": claims
 }
 
 # 
