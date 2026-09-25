@@ -28,6 +28,10 @@ cert_response := http.send({
     "force_cache_duration_seconds": 3600 # Cache response for an hour
 })
 
+certs = cert_response
+
+cert_code = cert_response.status_code
+
 # 
 # print("[zzz] cert_response: ", cert_response)
 # 
