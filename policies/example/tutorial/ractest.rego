@@ -11,7 +11,7 @@
 
 # Simple example OPA policy rules
 
-package example.tutorial.ractest
+package example.fred.bob
 
 import rego.v1
 
