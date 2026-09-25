@@ -16,8 +16,7 @@ package example.tutorial.ractest
 import rego.v1
 
 default allow = false
-
-allow if verified
+allow if privileged
 
 certs := http.send({
     "url": "http://iam-keycloak-operator-service:8080/realms/eoepca/protocol/openid-connect/certs",
@@ -30,12 +29,14 @@ certs_error := certs.error if {
     certs.error
 }
 
-jwks := certs.raw_body if {
-    certs.status_code == 200
-}
-
 jwks_code := certs.status_code
 
+default jwks = null
+jwks := certs.raw_body if {
+    jwks_code == 200
+}
+
+default bearer_token = null
 bearer_token := token if {
     some authKey in ["Authorization", "authorization"]
     [scheme, token] := split(input.request.headers[authKey], " ")
@@ -44,11 +45,18 @@ bearer_token := token if {
 
 default verified = false
 verified := io.jwt.verify_rs256(bearer_token, jwks) if {
-    jwks_code == 200
+    bearer_token != null
+    jwks != null
 }
 
+default claims = null
 claims := io.jwt.decode(bearer_token)[1] if {
     verified
+}
+
+default privileged = false
+privileged if {
+    claims.preferred_username == data.policies.example.privileged_users[_]
 }
 
 debug := {
@@ -56,7 +64,8 @@ debug := {
     "jwks_code": jwks_code,
     "token": bearer_token,
     "verified": verified,
-    "claims": claims
+    "claims": claims,
+    "privileged": privileged
 }
 
 # 
