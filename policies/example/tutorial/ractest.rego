@@ -14,6 +14,7 @@
 package example.tutorial.ractest
 
 import rego.v1
+import input.request
 
 default allow = true
 
@@ -26,7 +27,7 @@ certs := http.send({
 })
 
 debug := {
-    "input": input
+    "input_request": input.request
     "certs_code": certs.status_code
 }
 
