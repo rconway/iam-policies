@@ -21,7 +21,7 @@ allow = true
 
 print("[zzz] input request: ", input.request)
 
-cert_response := http.send({
+cert_response = http.send({
     "url": "http://iam-keycloak-operator-service:8080/realms/eoepca/protocol/openid-connect/certs",
     "method": "GET",
     "force_cache": true,
@@ -30,6 +30,6 @@ cert_response := http.send({
 
 print("[zzz] cert_response: ", cert_response)
 
-cert_response_code := cert_response.status_code
+cert_response_code = cert_response.status_code
 
 print("[zzz] cert_response_code: ", cert_response_code)
