@@ -25,7 +25,9 @@ certs := http.send({
     "raise_error": true
 })
 
-certs_code := certs.status_code
+debug := {
+    certs_code := certs.status_code
+}
 
 # 
 # print("[zzz] cert_response: ", cert_response)
