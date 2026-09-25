@@ -14,7 +14,6 @@
 package example.tutorial.ractest
 
 import rego.v1
-import input.request
 
 default allow = true
 
