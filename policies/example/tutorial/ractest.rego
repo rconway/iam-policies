@@ -26,7 +26,7 @@ certs := http.send({
 })
 
 debug := {
-    certs_code := certs.status_code
+    "certs_code": certs.status_code
 }
 
 # 
